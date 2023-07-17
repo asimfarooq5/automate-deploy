@@ -1,7 +1,7 @@
 import os
 import shlex
 import subprocess
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -29,7 +29,7 @@ def create_repo(path, repo_name):
 
 @app.route('/create_repo', methods=['POST'])
 def created():
-    create_repo('/home/root1/',  'create_test')
+    create_repo(request.form['path'],  request.form['repo_name'])
     return 'Ok', 200
 
 
@@ -40,4 +40,4 @@ def pull_restart():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    app.run(host='locahost', debug=True, threaded=True)
